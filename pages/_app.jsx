@@ -18,7 +18,7 @@ export default function MyApp(props) {
     return (
         <>
             <Head>
-                <title>My page</title>
+                <title>Local Taxi in Kusadasi</title>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
