@@ -1,29 +1,43 @@
+import { Fab } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import React from 'react';
-import Copyright from '../src/Copyright';
-import ProTip from '../src/ProTip';
+import FloatingButton from '../src/components/FloatingButton';
+import ScrollToTop from '../src/components/ScrollToTop';
+import Footer from '../src/views/Footer/Footer';
+import Header from '../src/views/Header/Header';
 
 export default function Index() {
     return (
         <Box minHeight="100vh">
-            <Grid
-                container
-                spacing={1}
-                direction="row"
-                justify="center"
-                alignItems="center"
-                alignContent="center"
-            ></Grid>
-            <Typography variant="h4" component="h1" gutterBottom>
-                Next.js example
-            </Typography>
+            <Header />
+            {Array(15)
+                .fill('x')
+                .map((i, index) => (
+                    <Typography
+                        key={`${i}-${index}`}
+                        variant="h4"
+                        component="h1"
+                        gutterBottom
+                    >
+                        Next.js example
+                    </Typography>
+                ))}
             {/* <Link href="/about" color="secondary">
                     Go to the about page
                 </Link> */}
-            <ProTip />
-            <Copyright />
+            <FloatingButton />
+            <ScrollToTop>
+                <Fab
+                    color="primary"
+                    size="small"
+                    aria-label="scroll back to top"
+                >
+                    <KeyboardArrowUpIcon />
+                </Fab>
+            </ScrollToTop>
+            <Footer />
         </Box>
     );
 }

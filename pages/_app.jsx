@@ -2,7 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
 import Head from 'next/head';
 import React from 'react';
-import theme from '../src/theme';
+import theme from '../src/assets/theme';
 
 export default function MyApp(props) {
     const { Component, pageProps } = props;
