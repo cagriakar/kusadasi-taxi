@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Box, Link, Toolbar, Typography } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -9,7 +9,7 @@ import React from 'react';
 import { companyName, phoneNumber } from '../../assets/constants';
 
 const useStyles = makeStyles((theme) => ({
-    appBar: { backgroundColor: theme.palette.background.default },
+    appBar: { backgroundColor: theme.palette.grey['900'] },
     root: { display: 'flex', justifyContent: 'space-between' },
     flex: { flexGrow: 1 },
     elevationOn: {
@@ -51,24 +51,41 @@ export default function Header() {
                         variant="h4"
                         component="h1"
                         className={classes.flex}
+                        color="primary"
                     >
                         {companyName}
                     </Typography>
 
-                    <WhatsAppIcon
-                        fontSize="large"
-                        style={{ color: green[500] }}
-                    />
-
-                    {matchesUptoSM && (
-                        <Typography
-                            className={classes.marginLeft}
-                            variant="h5"
-                            component="h1"
+                    <Link
+                        underline="none"
+                        color="inherit"
+                        href={`https://wa.me/${phoneNumber}`}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <Box
+                            display="flex"
+                            justifyContent="space-between"
+                            alignItems="center"
+                            spacing={5}
                         >
-                            {phoneNumber}
-                        </Typography>
-                    )}
+                            <WhatsAppIcon
+                                fontSize="large"
+                                style={{ color: green[500] }}
+                            />
+
+                            {matchesUptoSM && (
+                                <Typography
+                                    className={classes.marginLeft}
+                                    variant="h5"
+                                    component="h1"
+                                    color="primary"
+                                >
+                                    {`+${phoneNumber}`}
+                                </Typography>
+                            )}
+                        </Box>
+                    </Link>
                 </Toolbar>
             </AppBar>
             <Toolbar

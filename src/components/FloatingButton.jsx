@@ -8,12 +8,12 @@ import {
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import CallIcon from '@material-ui/icons/Call';
 import MailIcon from '@material-ui/icons/Mail';
 import TextsmsIcon from '@material-ui/icons/Textsms';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import React, { useState } from 'react';
+import createHref from '../helpers/createHref';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,11 +31,6 @@ export default function FloatingButton() {
 
     const matchesUptoSM = useMediaQuery(theme.breakpoints.up('sm'));
 
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0
-    });
-
     return (
         <Box className={classes.root} component="div">
             <ClickAwayListener onClickAway={() => setIsExpanded(false)}>
@@ -47,21 +42,16 @@ export default function FloatingButton() {
                 >
                     <Grid item>
                         <Tooltip title="Contact us" placement="left">
-                            <Zoom
-                                in={trigger}
-                                onExiting={() => setIsExpanded(false)}
+                            <Fab
+                                color="primary"
+                                size={matchesUptoSM ? 'large' : 'medium'}
+                                aria-label="contact us"
+                                onClick={() =>
+                                    setIsExpanded((prevValue) => !prevValue)
+                                }
                             >
-                                <Fab
-                                    color="primary"
-                                    size={matchesUptoSM ? 'large' : 'medium'}
-                                    aria-label="contact us"
-                                    onClick={() =>
-                                        setIsExpanded((prevValue) => !prevValue)
-                                    }
-                                >
-                                    <CallIcon />
-                                </Fab>
-                            </Zoom>
+                                <CallIcon />
+                            </Fab>
                         </Tooltip>
                     </Grid>
                     <Grid item>
@@ -71,6 +61,10 @@ export default function FloatingButton() {
                                     color="primary"
                                     size="small"
                                     aria-label="contact via whatsApp"
+                                    component="a"
+                                    href={createHref('whatsApp')}
+                                    target="_blank"
+                                    rel="noreferrer"
                                 >
                                     <WhatsAppIcon />
                                 </Fab>
@@ -84,6 +78,10 @@ export default function FloatingButton() {
                                     color="primary"
                                     size="small"
                                     aria-label="contact us via sms"
+                                    component="a"
+                                    href={createHref('sms')}
+                                    target="_blank"
+                                    rel="noreferrer"
                                 >
                                     <TextsmsIcon />
                                 </Fab>
@@ -97,6 +95,10 @@ export default function FloatingButton() {
                                     color="primary"
                                     size="small"
                                     aria-label="contact us via mail"
+                                    component="a"
+                                    href={createHref('email')}
+                                    target="_blank"
+                                    rel="noreferrer"
                                 >
                                     <MailIcon />
                                 </Fab>

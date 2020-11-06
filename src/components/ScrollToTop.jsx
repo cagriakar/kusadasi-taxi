@@ -1,5 +1,5 @@
-import { Zoom } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { useMediaQuery, Zoom } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import React from 'react';
 
@@ -8,6 +8,11 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         bottom: theme.spacing(4),
         right: theme.spacing(2.5)
+    },
+    root2: {
+        position: 'fixed',
+        bottom: theme.spacing(4),
+        right: theme.spacing(3)
     }
 }));
 
@@ -17,6 +22,8 @@ export default function ScrollToTop({ children }) {
         disableHysteresis: true,
         threshold: 100
     });
+    const theme = useTheme();
+    const matchesUptoSM = useMediaQuery(theme.breakpoints.up('sm'));
 
     function handleClick() {
         const anchor = document.querySelector('#back-to-top-anchor');
@@ -32,7 +39,7 @@ export default function ScrollToTop({ children }) {
             <div
                 onClick={handleClick}
                 role="presentation"
-                className={classes.root}
+                className={matchesUptoSM ? classes.root2 : classes.root}
             >
                 {children}
             </div>
